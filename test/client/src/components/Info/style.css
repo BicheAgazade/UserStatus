@@ -1,0 +1,73 @@
+.info-main-div{
+    background: linear-gradient(rgb(89, 89, 244),lightblue);
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+.info-inner-div{
+    padding: 10px  20px;
+    background-color: white;
+    text-align: center;
+    width: 40%;
+     border-radius: 10px;
+    
+}
+
+.status-form{
+    display: flex;
+   margin-top:20px ;
+}
+.add-status-input{
+    width: 30%;
+}
+
+
+h1{
+   margin: 15px 20px;
+   color: blue;
+   font-size: 36px;
+}
+
+.name-p{
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 700;
+}
+h2{
+    margin-top: 20px;
+}
+
+table{
+width: 97%;
+margin: 20px auto;
+border-collapse: collapse;
+
+
+}
+
+td{
+   border: 1px solid lightblue;
+   padding: 10px;
+}
+.btn-div{
+    width: 100%;
+}
+button{
+ padding: 5px 10px;
+ border: 0;
+
+}
+.status-td{width: 80%;}
+
+.action-td{width: 20%;}
+
+.delete-btn{
+    width: 22%;
+    margin-left: 20px;
+   
+}
+
+.update-btn{
+    width: 22px;
+
+}

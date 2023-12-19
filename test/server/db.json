@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "fullname": "Biche Agazade",
+      "birth": "2023-12-14",
+      "country": "Azerbaycan",
+      "email": "test@test",
+      "password": "1",
+      "confirmPassword": "1",
+      "id": 1
+    },
+    {
+      "fullname": "Biche Agazade",
+      "birth": "2023-12-22",
+      "country": "Azerbaycan",
+      "email": "new@new",
+      "password": "1",
+      "confirmPassword": "1",
+      "id": 2
+    }
+  ],
+  "status": [
+    {
+      "stat": "eto perviy status",
+      "userId": 2,
+      "id": 3
+    },
+    {
+      "stat": "eto vtiroy status",
+      "userId": 2,
+      "id": 4
+    },
+    {
+      "stat": "Привет",
+      "userId": 1,
+      "id": 14
+    },
+    {
+      "stat": "Как дела",
+      "userId": 1,
+      "id": 15
+    }
+  ]
+}
