@@ -71,3 +71,15 @@ button{
     width: 22px;
 
 }
+.logout-btn{
+   padding: 10px 30px ;
+   background-color: gray;
+   color: white;
+   border-radius: 10px;
+   font-weight: 600;
+   letter-spacing: 2px;
+}
+.logout-btn:hover{
+    cursor: pointer;
+    background-color: rgb(95, 85, 85);
+}

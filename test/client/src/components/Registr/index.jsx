@@ -32,6 +32,11 @@ function RegistrUser({ setRegistr, setLogin }) {
       alert("Fill in all the fields");
       return;
     }
+
+    if(!(postData.password===postData.confirmPassword)){
+      alert("Enter the same password");
+      return
+    }
   let addUser = listData.find((user) => user.email === postData.email);
 
      {!addUser? axios.post("http://localhost:3000/users", postData)

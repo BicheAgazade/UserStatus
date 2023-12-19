@@ -17,7 +17,7 @@ function App() {
   return (
     <div>
       {registr && <RegistrUser setRegistr={setRegistr} setLogin={setLogin} />}
-      {infoUser && <InfoUser userId={userId} />}
+      {infoUser && <InfoUser  userId={userId} setInfoUser={setInfoUser}  setLogin={setLogin}/>}
       {login && (
         <LoginUser
         setRegistr={setRegistr}

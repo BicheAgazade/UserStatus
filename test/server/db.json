@@ -17,6 +17,15 @@
       "password": "1",
       "confirmPassword": "1",
       "id": 2
+    },
+    {
+      "fullname": "Biche Agazade",
+      "birth": "2023-12-30",
+      "country": "Azerbaycan",
+      "email": "bicewka_19@mail.ru",
+      "password": "1",
+      "confirmPassword": "1",
+      "id": 3
     }
   ],
   "status": [

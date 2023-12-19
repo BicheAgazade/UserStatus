@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRef } from "react";
 
 
-function InfoUser({ userId }) {
+function InfoUser({ setInfoUser, userId, setLogin }) {
   const [todos, setTodos] = useState([]);
   const [postStatus, setPostStatus] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -12,93 +12,85 @@ function InfoUser({ userId }) {
   let id = userId;
   const inputRef = useRef();
 
-
-
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const userResponse = await axios.get(
-        `http://localhost:3000/users?id=${id}`
-      );
-
-      const statusResponse = await axios.get(
-        `http://localhost:3000/status?userId=${id}`
-      );
-
-      if (userResponse.data.length > 0) {
-        setTodos(userResponse.data);
-        
-      }
-
-      if (statusResponse.data.length > 0) {
-        setPostStatus(statusResponse.data);
-      }
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
-
-  fetchData();
-}, [isLoading]);
-
-
-
-function postStatusFunc(e) {
-  e.preventDefault();
-if(!inputRef.current.value.length>0){
-  alert("You have not entered a status");
-  return
-}
-
-  if (editingStatus.id === null) {
-    axios
-      .post(`http://localhost:3000/status?userId=${id}`, {
-        stat: inputRef.current.value,
-        userId: id,
-      })
-      .then((res) => {
-        setPostStatus([...postStatus, res.data]);
-        setIsLoading((prev) => !prev);
-      setTimeout(() => {
-        inputRef.current.value = "";
-      }, 100);
-      });
-  } else {
-    axios
-      .patch(`http://localhost:3000/status/${editingStatus.id}`, {
-        stat: inputRef.current.value,
-        userId: id,
-      })
-      .then((res) => {
-        const updatedStatus = postStatus.map((stts) =>
-          stts.id === editingStatus.id ? res.data : stts
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userResponse = await axios.get(
+          `http://localhost:3000/users?id=${id}`
         );
-        setPostStatus(updatedStatus);
-        setIsLoading((prev) => !prev);
+
+        const statusResponse = await axios.get(
+          `http://localhost:3000/status?userId=${id}`
+        );
+
+        if (userResponse.data.length > 0) {
+          setTodos(userResponse.data);
+        }
+
+        if (statusResponse.data.length > 0) {
+          setPostStatus(statusResponse.data);
+        }
+      } catch (error) {
+        console.error("Error", error);
+      }
+    };
+
+    fetchData();
+  }, [isLoading]);
+
+  function postStatusFunc(e) {
+    e.preventDefault();
+    if (!inputRef.current.value.length > 0) {
+      alert("You have not entered a status");
+      return;
+    }
+
+    if (editingStatus.id === null) {
+      axios
+        .post(`http://localhost:3000/status?userId=${id}`, {
+          stat: inputRef.current.value,
+          userId: id,
+        })
+        .then((res) => {
+          setPostStatus([...postStatus, res.data]);
+          setIsLoading((prev) => !prev);
+          setTimeout(() => {
+            inputRef.current.value = "";
+          }, 100);
+        });
+    } else {
+      axios
+        .patch(`http://localhost:3000/status/${editingStatus.id}`, {
+          stat: inputRef.current.value,
+          userId: id,
+        })
+        .then((res) => {
+          const updatedStatus = postStatus.map((stts) =>
+            stts.id === editingStatus.id ? res.data : stts
+          );
+          setPostStatus(updatedStatus);
+          setIsLoading((prev) => !prev);
+          inputRef.current.value = "";
+          setEditingStatus({ id: null, stat: "" });
+        });
+    }
+  }
+
+  function deleteFunc(param) {
+    const newStatus = postStatus.filter((item) => item.id !== param);
+    setPostStatus(newStatus);
+
+    axios
+      .delete(`http://localhost:3000/status/${param}`)
+      .then((res) => {
         inputRef.current.value = "";
         setEditingStatus({ id: null, stat: "" });
+      })
+      .catch((error) => {
+        console.error("error", error);
+        setPostStatus(postStatus);
       });
   }
-}
-
-
-
- function deleteFunc(param) {
-   const newStatus = postStatus.filter((item) => item.id !== param);
-   setPostStatus(newStatus);
-
-   axios.delete(`http://localhost:3000/status/${param}`)
-     .then((res) => {
-       inputRef.current.value = "";
-       setEditingStatus({ id: null, stat: "" });
-     })
-     .catch((error) => {
-       console.error("error", error);
-      setPostStatus(postStatus);
-     });
- }
-
-
 
   return (
     <div className="info-main-div">
@@ -122,7 +114,11 @@ if(!inputRef.current.value.length>0){
                 setEditingStatus({ ...editingStatus, stat: e.target.value })
               }
             />
-            <input className="add-status-input" type="submit" value="Add Status"/>
+            <input
+              className="add-status-input"
+              type="submit"
+              value="Add Status"
+            />
           </form>
           <h2>Status List</h2>
           <table>
@@ -153,9 +149,8 @@ if(!inputRef.current.value.length>0){
             </tbody>
           </table>
         </div>
-        <button>Logout</button>
+        <button className="logout-btn" onClick={() => {setInfoUser(false); setLogin(true)}}>Logout</button>
       </div>
-
     </div>
   );
 }

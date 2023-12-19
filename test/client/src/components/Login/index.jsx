@@ -11,6 +11,7 @@ const [isShow, setIsShow] = useState(false);
 
 
 
+
   function loginFunc(e) {
     e.preventDefault();
 
@@ -23,7 +24,7 @@ const [isShow, setIsShow] = useState(false);
           setInfoUser(true);
           setLogin(false);
           setUserId(res.data[0].id);
-       
+  
         } else {
           alert("The password or login is incorrect");
         }
@@ -62,6 +63,7 @@ const [isShow, setIsShow] = useState(false);
             onClick={() => {
               setLogin(false);
               setRegistr(true);
+             
             }}
             className="back-btn"
           >
